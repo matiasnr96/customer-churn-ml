@@ -216,3 +216,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# Entorno virtual
+.venv/
+
+# MLflow local
+mlflow.db
+mlruns/
+notebooks/mlruns/
+
+# Python
+__pycache__/
+*.pyc
