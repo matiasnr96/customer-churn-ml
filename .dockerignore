@@ -1,0 +1,31 @@
+
+# Entorno virtual
+.venv/
+venv/
+
+# Git y DVC
+.git/
+.dvc/
+*.dvc
+
+# Archivos locales de MLflow
+mlflow.db
+mlruns/
+
+# Cache de Python y pytest
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Notebooks y datos
+notebooks/
+data/
+
+# Archivos de desarrollo
+.vscode/
+.gitignore
+
+# Archivos auxiliares
+verificar_modelo.py
+probar_prediccion.py
+exportar_modelo.py

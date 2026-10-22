@@ -229,3 +229,18 @@ notebooks/mlruns/
 # Python
 __pycache__/
 *.pyc
+
+
+# Configuración local de VS Code
+.vscode/
+
+# Credenciales y archivos sensibles
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Scripts auxiliares de pruebas manuales
+probar_prediccion.py
+verificar_modelo.py
+/models
