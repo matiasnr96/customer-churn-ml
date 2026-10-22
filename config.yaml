@@ -1,0 +1,17 @@
+
+# Configuración del proyecto Customer Churn
+
+data:
+  path: "data/customer_churn_historical.csv"
+  test_size: 0.2
+  random_state: 42
+
+model:
+  type: "LogisticRegression"
+  max_iter: 1000
+  class_weight: "balanced"
+
+mlflow:
+  tracking_uri: "sqlite:///mlflow.db"
+  experiment_name: "customer-churn-experimentos"
+  run_name: "train_logistica_balanceada"
