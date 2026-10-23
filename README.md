@@ -146,3 +146,101 @@ Luego ingresar desde el navegador a `http://127.0.0.1:5000`.
 El código se versiona con Git y GitHub.
 
 Los datos se versionan con DVC y se almacenan remotamente en DagsHub.
+
+
+## Segundo parcial: API de inferencia y Docker
+
+### Funcionalidades implementadas
+
+El proyecto incorpora una API REST desarrollada con FastAPI para realizar predicciones de abandono de clientes (Customer Churn).
+
+El modelo utilizado es una regresión logística entrenada con scikit-learn y registrada en MLflow. Para su ejecución en Docker, se utiliza una versión exportada del modelo y versionada mediante DVC.
+
+La aplicación incluye:
+
+- Endpoint `GET /health` para verificar el estado del servicio y la carga del modelo.
+- Endpoint `POST /predict` para recibir los datos de un cliente y generar una predicción.
+- Validación de datos mediante Pydantic.
+- Documentación interactiva con Swagger.
+- Tests automatizados con pytest.
+- Contenerización con Docker y ejecución mediante Docker Compose.
+
+### Requisitos
+
+- Python 3.10.
+- Docker Desktop con Docker Compose.
+- Git y DVC.
+- Acceso al almacenamiento remoto de DVC para recuperar los datos y el modelo.
+
+### Instalación y ejecución
+
+**1. Clonar el repositorio**
+
+```bash
+git clone https://github.com/matiasnr96/customer-churn-ml.git
+cd customer-churn-ml
+git checkout desarrollo-parcial-2
+```
+
+**2. Crear el entorno virtual e instalar dependencias**
+
+En Windows PowerShell:
+
+```powershell
+py -3.10 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+**3. Recuperar los archivos versionados con DVC**
+
+```bash
+dvc pull
+```
+
+Este comando recupera el dataset y el modelo exportado desde el almacenamiento remoto configurado en DVC. Puede requerir autenticación.
+
+**4. Ejecutar la API con Docker Compose**
+
+```bash
+docker compose up --build -d
+```
+
+**5. Verificar el servicio**
+
+- Estado de la API: http://localhost:8000/health
+- Documentación Swagger: http://localhost:8000/docs
+
+Desde Swagger se puede utilizar `POST /predict` para enviar los datos de un cliente y obtener una predicción.
+
+La respuesta contiene:
+
+- `prediction`: indica si el cliente abandonará el servicio (`Yes` o `No`).
+- `probability`: probabilidad estimada de abandono.
+- `risk_level`: clasificación de riesgo (`LOW`, `MEDIUM` o `HIGH`).
+- `model_version`: versión del modelo utilizado.
+
+**6. Ejecutar los tests**
+
+En Windows PowerShell, con el entorno virtual activado:
+
+```powershell
+$env:MODEL_SOURCE = "local"
+python -m pytest tests/ -v
+```
+
+En la última ejecución se aprobaron los 7 tests automatizados.
+
+**7. Detener la aplicación**
+
+```bash
+docker compose down
+```
+
+### Versionado y reproducibilidad
+
+Git se utiliza para versionar el código fuente y la configuración. DVC permite gestionar los archivos de datos y del modelo entrenado, almacenados de forma remota en DagsHub.
+
+MLflow se utiliza para el seguimiento de experimentos y el registro del modelo. Para ejecutar la API dentro de Docker se utiliza el modelo exportado en `models/`, evitando depender de una instancia activa de MLflow.
+
+El trabajo del segundo parcial se desarrolla en la rama `desarrollo-parcial-2`.

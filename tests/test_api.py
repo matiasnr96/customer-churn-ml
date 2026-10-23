@@ -42,8 +42,9 @@ def test_predict_valido():
     resultado = respuesta.json()
 
     assert resultado["prediction"] in ["Yes", "No"]
-    assert 0 <= resultado["churn_probability"] <= 1
+    assert 0 <= resultado["probability"] <= 1
     assert resultado["risk_level"] in ["LOW", "MEDIUM", "HIGH"]
+    assert resultado["model_version"] == "1"
 
 
 def test_predict_tenure_negativo():

@@ -31,14 +31,15 @@ def test_prediccion_valida(modelo, datos_cliente):
     resultado = predecir_cliente(modelo, datos_cliente)
 
     assert resultado["prediction"] in ["Yes", "No"]
-    assert 0 <= resultado["churn_probability"] <= 1
+    assert 0 <= resultado["probability"] <= 1
     assert resultado["risk_level"] in ["LOW", "MEDIUM", "HIGH"]
+    assert resultado["model_version"] == "1"
 
 
 def test_clasificacion_riesgo(modelo, datos_cliente):
     resultado = predecir_cliente(modelo, datos_cliente)
 
-    probabilidad = resultado["churn_probability"]
+    probabilidad = resultado["probability"]
     riesgo = resultado["risk_level"]
 
     if probabilidad < 0.30:

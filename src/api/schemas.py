@@ -35,7 +35,7 @@ class ClienteInput(BaseModel):
 
 
 class PrediccionOutput(BaseModel):
-
     prediction: Literal["Yes", "No"]
-    churn_probability: float = Field(ge=0, le=1)
+    probability: float = Field(ge=0, le=1)
     risk_level: Literal["LOW", "MEDIUM", "HIGH"]
+    model_version: str

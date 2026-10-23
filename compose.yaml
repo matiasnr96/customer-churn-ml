@@ -1,0 +1,11 @@
+
+services:
+  api:
+    build: .
+    image: customer-churn-api:entrega-2
+    container_name: customer-churn-api
+    ports:
+      - "8000:8000"
+    environment:
+      MODEL_SOURCE: local
+    restart: unless-stopped

@@ -67,7 +67,8 @@ def predecir_cliente(modelo, datos_cliente):
         riesgo = "HIGH"
 
     return {
-        "prediction": str(prediccion),
-        "churn_probability": round(float(probabilidad), 4),
-        "risk_level": riesgo
-    }
+    "prediction": str(prediccion),
+    "probability": round(float(probabilidad), 4),
+    "risk_level": riesgo,
+    "model_version": "1"
+}
